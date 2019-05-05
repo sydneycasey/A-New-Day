@@ -4,27 +4,55 @@ class Activities extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activities: []
+      morning: [],
+      afternoon: [],
+      evening: []
     };
-  }
+  };
 
   componentDidMount() {
-    fetch('/activities')
+    fetch('/morning')
     .then(response => response.json())
-    .then(activities => this.setState({ activities }))
+    .then(morning => this.setState({ morning }))
+    .catch(error => console.log(error));
+
+    fetch('/afternoon')
+    .then(response => response.json())
+    .then(afternoon => this.setState({ afternoon }))
+    .catch(error => console.log(error));
+
+    fetch('/evening')
+    .then(response => response.json())
+    .then(evening => this.setState({ evening }))
     .catch(error => console.log(error))
   }
 
   render() {
     console.log(this.state.activities)
     return (
-      this.state.activities.map((item) => (
-        <div id="activities">
+      <div id="activities">
+      {this.state.morning.map((item) => (
+        <div id="morning">
+        <div id="time">this {item.time}:</div>
         <div id="activity">{item.activity}</div>
-        <div id="time">in the {item.time}</div>
-        <div id="price">${item.price} or under</div>
+        <div id="price">for less than ${item.price}</div>
         </div>
-      ))
+      ))}
+      {this.state.afternoon.map((item) => (
+        <div id="afternoon">
+        <div id="time">this {item.time}:</div>
+        <div id="activity">{item.activity}</div>
+        <div id="price">for less than ${item.price}</div>
+        </div>
+      ))}
+      {this.state.evening.map((item) => (
+        <div id="evening">
+        <div id="time">this {item.time}:</div>
+        <div id="activity">{item.activity}</div>
+        <div id="price">for less than ${item.price}</div>
+        </div>
+      ))}
+      </div>
     )
   }
 }

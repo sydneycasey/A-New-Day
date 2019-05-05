@@ -37,4 +37,12 @@ app.get('/evening', (req, res) => {
   });
 });
 
+app.post('/newActivity', (req, res) => {
+  console.log(req.body)
+  db.addActivity(req.body, (err, response) => {
+    if (err) { console.log(err); }
+    else { res.send('successfully added '+ req.body)}
+  });
+});
+
 app.listen(port, () => { console.log(`listening on port ${port} :)`)});

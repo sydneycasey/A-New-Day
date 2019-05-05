@@ -35,21 +35,18 @@ class Activities extends React.Component {
         <div id="morning">
         <div id="time">this {item.time}:</div>
         <div id="activity">{item.activity}</div>
-        <div id="price">for less than ${item.price}</div>
         </div>
       ))}
       {this.state.afternoon.map((item) => (
         <div id="afternoon">
         <div id="time">this {item.time}:</div>
         <div id="activity">{item.activity}</div>
-        <div id="price">for less than ${item.price}</div>
         </div>
       ))}
       {this.state.evening.map((item) => (
         <div id="evening">
         <div id="time">this {item.time}:</div>
         <div id="activity">{item.activity}</div>
-        <div id="price">for less than ${item.price}</div>
         </div>
       ))}
       </div>

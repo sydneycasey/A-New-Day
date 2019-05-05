@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const model = require('./schema.js');
 
+mongoose.connect('mongodb://localhost/adventure');
+
 const getActivities = (callback) => {
   model.Adventures
   .find()
@@ -25,9 +27,17 @@ const getEvening = (callback) => {
   .exec(callback);
 };
 
+const addActivity =  (activity, callback) => {
+  model.Adventures
+  .create(activity)
+  .save(activity)
+  .exec(callback)
+};
+
 module.exports = {
   getActivities,
   getMorning,
   getAfternoon,
-  getEvening
+  getEvening,
+  addActivity
 };

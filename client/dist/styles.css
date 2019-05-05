@@ -27,10 +27,11 @@ body {
   display: flex;
   height: 100px;
   width: 100px;
-  background-image: radial-gradient(white, #ff9966);
+  background-image: linear-gradient(#ffc928, #7151ff);
   border: solid black 1px;
   border-radius: 50px;
   justify-content: center;
+  color: white;
 }
 
 #logo-text {

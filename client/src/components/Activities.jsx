@@ -19,7 +19,11 @@ class Activities extends React.Component {
     console.log(this.state.activities)
     return (
       this.state.activities.map((item) => (
-        <div>{item.activity}</div>
+        <div id="activities">
+        <div id="activity">{item.activity}</div>
+        <div id="time">in the {item.time}</div>
+        <div id="price">${item.price} or under</div>
+        </div>
       ))
     )
   }

@@ -1,0 +1,38 @@
+body {
+  background-image: linear-gradient(#ff9966, #66d9ff, #9999ff);
+  font-family: 'Comfortaa', arial;
+}
+
+
+#activity {
+  display: flex;
+  font-family: 'Comfortaa', arial;
+  font-size: 20px;
+  color: white;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+#time {
+  display: flex;
+  justify-content: center;
+}
+
+#price {
+  display: flex;
+  justify-content: center;
+}
+
+#logo {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  background-image: radial-gradient(white, #ff9966);
+  border: solid black 1px;
+  border-radius: 50px;
+  justify-content: center;
+}
+
+#logo-text {
+  margin-top: 40px;
+}

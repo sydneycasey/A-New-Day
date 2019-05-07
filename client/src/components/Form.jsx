@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Form extends React.Component {
   constructor(props) {
@@ -23,18 +24,15 @@ class Form extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault()
-    let data = {
-      'activity': this.state.activity,
-      'time': this.state.time
-    }
-    fetch('/newActivity', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
+    e.preventDefault();
+    let data = [this.state.activity, this.state.time];
+
+    axios.post('/newActivity', data)
+    .then(res => console.log(res))
+    .then(body => console.log('successfully inserted', body))
     .catch(error => console.log(error));
+
+    this.setState( {hidden: true });
   };
 
   showForm() {
@@ -43,17 +41,17 @@ class Form extends React.Component {
 
   render() {
     return (
-      this.state.hidden ? <button id="form-btn" onClick={this.showForm}>Don't see what you want to do?</button> :
+      this.state.hidden ? <button id="form-btn" onClick={this.showForm}>+</button> :
       <form id="form" onSubmit={this.handleSubmit}>
         <label>
           What do you want to do?
-          <input type="text" value={this.state.activity} onChange={this.handleActivity}/>
+          <input id="activity-text" type="text"  value={this.state.activity} onChange={this.handleActivity}/>
         </label>
         <label>
           When do you want to do it?
-          <input type="text" value={this.state.time} onChange={this.handleTime}/>
+          <input id="time-text" type="text" value={this.state.time} onChange={this.handleTime}/>
         </label>
-        <input id="submit-btn" type="submit" value="Submit" onClick={this.showForm}/>
+        <input id="submit-btn" type="submit" value="+"/>
       </form>
     )
   }

@@ -1,37 +1,35 @@
-const mongoose = require('mongoose');
-const model = require('./schema.js');
+var mysql = require('mysql');
 
-mongoose.connect('mongodb://localhost/adventure');
+var db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: 'adventures'
+});
+
+db.connect( (err) => {
+  if (err) throw err;
+  console.log("Connected!");
+});
 
 const getActivities = (callback) => {
-  model.Adventures
-  .find()
-  .exec(callback);
+  db.query('SELECT * FROM activities', callback);
 };
 
 const getMorning = (callback) => {
-  model.Adventures
-  .aggregate([ { $match: {time: "morning"} }, { $sample: { size: 1 } } ])
-  .exec(callback);
+  db.query(`SELECT * FROM activities WHERE time = 'morning' order by rand() limit 1`, callback)
 };
 
 const getAfternoon = (callback) => {
-  model.Adventures
-  .aggregate([ { $match: {time: "afternoon"} }, { $sample: { size: 1 } } ])
-  .exec(callback);
+  db.query(`SELECT * FROM activities WHERE time = 'afternoon ' order by rand() limit 1`, callback)
 };
 
 const getEvening = (callback) => {
-  model.Adventures
-  .aggregate([ { $match: {time: "evening"} }, { $sample: { size: 1 } } ])
-  .exec(callback);
+  db.query(`SELECT * FROM activities WHERE time = 'evening' order by rand() limit 1`, callback)
 };
 
-const addActivity =  (activity, callback) => {
-  model.Adventures
-  .create(activity)
-  .save(activity)
-  .exec(callback)
+const addActivity =  (data, callback) => {
+  db.query('INSERT INTO activities (activity, time) VALUES ? ', [data], callback)
 };
 
 module.exports = {

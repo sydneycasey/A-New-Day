@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('../database/index');
+const db = require('../database/index.js');
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,10 +38,10 @@ app.get('/evening', (req, res) => {
 });
 
 app.post('/newActivity', (req, res) => {
-  console.log(req.body)
-  db.addActivity(req.body, (err, response) => {
+  console.log('server req.body', req.body);
+  db.addActivity([req.body], (err, result) => {
     if (err) { console.log(err); }
-    else { res.send('successfully added '+ req.body)}
+    else { console.log('inserted') + result.affectedRows }
   });
 });
 

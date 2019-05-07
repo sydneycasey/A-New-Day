@@ -6,7 +6,7 @@ class Activities extends React.Component {
     this.state = {
       morning: [],
       afternoon: [],
-      evening: []
+      evening: [],
     };
   };
 
@@ -28,17 +28,16 @@ class Activities extends React.Component {
   }
 
   render() {
-    console.log(this.state.activities)
     return (
       <div id="activities">
       {this.state.morning.map((item) => (
         <div id="morning">
         <div id="time">this {item.time}:</div>
-        <div id="activity">{item.activity}</div>
+        <div onClick={this.changeMorning}id="activity">{item.activity } </div>
         </div>
       ))}
       {this.state.afternoon.map((item) => (
-        <div id="afternoon">
+        <div id="afternoon" onClick={this.changeMorning}>
         <div id="time">this {item.time}:</div>
         <div id="activity">{item.activity}</div>
         </div>
